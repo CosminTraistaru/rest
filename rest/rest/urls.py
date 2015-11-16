@@ -21,16 +21,12 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 
 router = routers.DefaultRouter()
-# router.register(r'users', views.UserViewSet)
-# router.register(r'items', views.ItemsViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^items/$', views.ItemViewSet.as_view(), name='items-list'),
-    url(r'^users/$', views.UserViewSet.as_view({'get': 'list'}), name='users-list'),
-    # url(r'^items/$', views.items_list),
-    # url(r'^', include(router.urls)),
+    url(r'^users/$', views.UserViewSet.as_view(), name='users-list'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
