@@ -26,8 +26,19 @@ router = routers.DefaultRouter()
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^items/$', views.ItemViewSet.as_view(), name='items-list'),
+    url(r'^items/search/(?P<pk>[a-zA-Z0-9]+)/$',
+        views.SearchItemsViewSet.as_view(),
+        name='item-list'),
     url(r'^users/$', views.UserViewSet.as_view(), name='users-list'),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^items/tag/(?P<pk>[a-z]+)/$',
+        views.TagsViewSet.as_view(),
+        name='tags-list'),
+    url(r'^item/(?P<pk>[a-zA-Z0-9]+)/$',
+        views.SingleItemViewSet.as_view(),
+        name='item-list'),
+    url(r'^api-auth/',
+        include('rest_framework.urls',
+                namespace='rest_framework')),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

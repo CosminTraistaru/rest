@@ -18,3 +18,39 @@ class ItemViewSet(generics.ListCreateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
     permission_classes = (IsAuthenticated,)
+
+
+class TagsViewSet(generics.ListCreateAPIView):
+    """
+    List all items from a specific tag.
+    """
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def filter_queryset(self, queryset):
+        return queryset.filter(tags__tag=self.kwargs['pk'])
+
+
+class SingleItemViewSet(generics.ListCreateAPIView):
+    """
+    List all items from a specific tag.
+    """
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def filter_queryset(self, queryset):
+        return queryset.filter(name=self.kwargs['pk'])
+
+
+class SearchItemsViewSet(generics.ListCreateAPIView):
+    """
+    List all items from a specific tag.
+    """
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def filter_queryset(self, queryset):
+        return queryset.filter(name__contains=self.kwargs['pk'])
